@@ -3,7 +3,6 @@
   <p align="center">
   This is a little project that I came up with, simply for the sole purpose of improving his skills in programming. It does a few fun things and is just designed to be a fun bot that you can play around with. We are adding a few features now and then, adding to the funcionality of the bot, a little by little. Stay tuned!
     <br />
-    <a href="https://github.com/cdhiraj40/PoggetBot"><strong>Explore the docs »</strong></a>
     <a href="https://github.com/cdhiraj40/PoggerBot/issues">Report Bug</a>
   </p>
 </div>
@@ -24,9 +23,9 @@
 </details>
 
 
-## Aboutbot
+## About Bot
 
-This is a little project that I came up with, simply for the sole purpose of improving his skills in programming. It does a few fun things and is just designed to be a fun bot that you can play around with. We are adding a few features now and then, adding to the funcionality of the bot, a little by little. Stay tuned!
+  This is a little project that I came up with, simply for the sole purpose of improving his skills in programming. It does a few fun things and is just designed to be a fun bot that you can play around with. We are adding a few features now and then, adding to the funcionality of the bot, a little by little. Stay tuned!
 
 ### Built With
 
@@ -35,11 +34,8 @@ This is a little project that I came up with, simply for the sole purpose of imp
 ## Roadmap
 
 - [] Music
-<!-- - [] ???
-- [] ???
-    - [] ??? -->
 
-See the [open issues](https://github.com/cdhiraj40/PoggetBot/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/cdhiraj40/PoggerBot/issues) for a full list of proposed features (and known issues).
 
 ## Contributing
 
@@ -47,6 +43,12 @@ Contributions are what make the open source community such an amazing place to l
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!
+
+## Me
+
+Dhiraj Chauhan - [@Tfunnyintrovert](https://twitter.com/Tfunnyintrovert) - chauhandhiraj40@gmail.com
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 Dhiraj Chauhan - [Dhiraj Chauhan](https://www.linkedin.com/in/cdhiraj40/) - chauhandhiraj40@gmail.com
 

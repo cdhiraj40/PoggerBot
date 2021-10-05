@@ -12,7 +12,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#aboutbot">About The Bot</a>
+      <a href="#about-bot">About The Bot</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -26,7 +26,7 @@
 
 ## Aboutbot
 
-  This is a little project that cdhiraj40 came up with, simply for the sole purpose of improving his skills in programming. It does a few fun things and is just designed to be a fun bot that you can play around with. We are adding a few features now and then, adding to the funcionality of the bot, a little by little. Stay tuned!
+This is a little project that I came up with, simply for the sole purpose of improving his skills in programming. It does a few fun things and is just designed to be a fun bot that you can play around with. We are adding a few features now and then, adding to the funcionality of the bot, a little by little. Stay tuned!
 
 ### Built With
 
@@ -35,9 +35,9 @@
 ## Roadmap
 
 - [] Music
+<!-- - [] ???
 - [] ???
-- [] ???
-    - [] ???
+    - [] ??? -->
 
 See the [open issues](https://github.com/cdhiraj40/PoggetBot/issues) for a full list of proposed features (and known issues).
 
@@ -48,6 +48,6 @@ Contributions are what make the open source community such an amazing place to l
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!
 
-Dhiraj Chauhan - [@Tfunnyintrovert](https://twitter.com/Tfunnyintrovert) - chauhandhiraj40@gmail.com
+Dhiraj Chauhan - [Dhiraj Chauhan](https://www.linkedin.com/in/cdhiraj40/) - chauhandhiraj40@gmail.com
 
 <p align="right">(<a href="#top">back to top</a>)</p>

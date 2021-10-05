@@ -46,9 +46,6 @@ Don't forget to give the project a star! Thanks again!
 
 ## Me
 
-Dhiraj Chauhan - [@Tfunnyintrovert](https://twitter.com/Tfunnyintrovert) - chauhandhiraj40@gmail.com
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 Dhiraj Chauhan - [Dhiraj Chauhan](https://www.linkedin.com/in/cdhiraj40/) - chauhandhiraj40@gmail.com
 

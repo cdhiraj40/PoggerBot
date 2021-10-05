@@ -297,6 +297,11 @@ def get_quote():
   quote = json_data[0]['q'] + " -" + json_data[0]['a']
   return(quote)
 
+def get_activity():
+    response = requests.get('https://www.boredapi.com/api/activity')
+    json_data = json.loads(response.text)
+    activity = json_data['activity']
+    return (activity)
     
 @client.event
 async def on_ready():
@@ -398,6 +403,10 @@ async def on_message(message):
     if message.content.startswith('shut up'):
         await message.channel.send("oh you should'nt fight me")
 
+    if message.content.startswith('!bored'):
+        activity = get_activity()
+        await message.channel.send(f'Are you bored ? ...{activity}')
+
     if message.content.startswith(""):
         await message.channel.send("")
         
@@ -407,4 +416,3 @@ async def on_message(message):
         
 keep_alive()
 client.run(os.getenv('TOKEN'))
-

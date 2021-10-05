@@ -1,7 +1,7 @@
 <div id="top"></div>
 <h3 align="center">PoggerBot</h3>
   <p align="center">
-  This is a little project that cdhiraj40 came up with, simply for the sole purpose of improving his skills in programming. It does a few fun things and is just designed to be a fun bot that you can play around with. We are adding a few features now and then, adding to the funcionality of the bot, a little by little. Stay tuned!
+  This is a little project that I came up with, simply for the sole purpose of improving his skills in programming. It does a few fun things and is just designed to be a fun bot that you can play around with. We are adding a few features now and then, adding to the funcionality of the bot, a little by little. Stay tuned!
     <br />
     <a href="https://github.com/cdhiraj40/PoggetBot"><strong>Explore the docs »</strong></a>
     <a href="https://github.com/cdhiraj40/PoggerBot/issues">Report Bug</a>

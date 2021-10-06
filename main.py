@@ -262,7 +262,7 @@ async def on_message(message):
         if robama.endswith(".jpg"):
             await message.channel.send(file=discord.File(robama))
         else:
-            await message.channel.send(random.choice(obama))
+            await message.channel.send(random.choice(robama))
 
     if message.content.startswith('eraserrollno'):
         await message.channel.send('7')

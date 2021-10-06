@@ -1,7 +1,7 @@
 <div id="top"></div>
 <h3 align="center">PoggerBot</h3>
   <p align="center">
-  This is a little project that cdhiraj40 came up with, simply for the sole purpose of improving his skills in programming. It does a few fun things and is just designed to be a fun bot that you can play around with. We are adding a few features now and then, adding to the funcionality of the bot, a little by little. Stay tuned!
+  This is a little project that I came up with, simply for the sole purpose of improving my skills in programming. It does a few fun things and is just designed to be a fun bot that you can play around with. We are adding a few features now and then, adding to the funcionality of the bot, a little by little. Stay tuned!
     <br />
     <a href="https://github.com/cdhiraj40/PoggerBot/issues">Report Bug</a>
   </p>
@@ -25,7 +25,7 @@
 
 ## About Bot
 
-  This is a little project that cdhiraj40 came up with, simply for the sole purpose of improving his skills in programming. It does a few fun things and is just designed to be a fun bot that you can play around with. We are adding a few features now and then, adding to the funcionality of the bot, a little by little. Stay tuned!
+  This is a little project that I came up with, simply for the sole purpose of improving my skills in programming. It does a few fun things and is just designed to be a fun bot that you can play around with. We are adding a few features now and then, adding to the funcionality of the bot, a little by little. Stay tuned!
 
 ### Built With
 
@@ -46,6 +46,7 @@ Don't forget to give the project a star! Thanks again!
 
 ## Me
 
-Dhiraj Chauhan - [@Tfunnyintrovert](https://twitter.com/Tfunnyintrovert) - chauhandhiraj40@gmail.com
+
+Dhiraj Chauhan - [Dhiraj Chauhan](https://www.linkedin.com/in/cdhiraj40/) - chauhandhiraj40@gmail.com
 
 <p align="right">(<a href="#top">back to top</a>)</p>

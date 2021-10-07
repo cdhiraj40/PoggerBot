@@ -275,9 +275,6 @@ async def on_message(message):
 
     if message.content.startswith('shut up'):
         await message.channel.send("oh you should'nt fight me")
-
-    if message.content.startswith(""):
-        await message.channel.send("")
         
 
         

@@ -4,4 +4,5 @@ We value all of your input and criticism that would help this bot become better 
 ## Languages
 If you want to work on another language alongside python, we will glady accept it into the bot as long as it works well with it. Of course, if you are coding in python, it would be best if you try to follow the [PEP8 guidelines](https://www.python.org/dev/peps/pep-0008/) to keep the code as neat as possible.
 
-## 
+## Procedure
+Before working on anything, you have to submit an issue to check if the moderators approve of the change that you are proposing. Once you are done with it, you have to follow the template of pull requests given, and then, you just have to wait. 

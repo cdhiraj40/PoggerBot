@@ -1,5 +1,5 @@
 # Related Issue
-- Issue #
+- fixes #
 
 # Changes Made
 - (state your changes)

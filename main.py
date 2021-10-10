@@ -278,7 +278,7 @@ async def on_message(message):
     if message.content.startswith('shut up'):
         await message.channel.send("oh you should'nt fight me")
     
-    if message.content.startswith('!img2ascii'):
+    if message.content.startswith(',img2ascii'):
         # Downloading image
         image_url = message.content.split()[1]
         img_data = requests.get(image_url).content

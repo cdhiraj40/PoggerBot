@@ -1,3 +1,4 @@
+import asyncio
 import discord
 import os
 import requests
@@ -11,7 +12,7 @@ import youtube_dl
 load_dotenv()
 bot = commands.Bot(command_prefix=',')
 
-cheesy_pick_up_lines=[
+cheesy_pick_up_lines = [
     "hey baby are you allergic to dairy cause I laktose clothes you're wearing",
     "Hey, my name’s Microsoft. Can I crash at your place tonight?",
     "Are you a parking ticket? Because you’ve got FINE written all over you.",
@@ -20,7 +21,7 @@ cheesy_pick_up_lines=[
     "Well, here I am. What are your other two wishes?",
 ]
 
-cute_pick_up_lines=[
+cute_pick_up_lines = [
     "Your hand looks heavy can I hold it for you?"
     "Do You Have A Name Or Can I Call You Mine? ",
     "Was Your Dad A Boxer? Because Damn, You’re A Knockout!(pls make a curious face u dumbA**)",
@@ -29,7 +30,7 @@ cute_pick_up_lines=[
     " I Was Blinded By Your Beauty… I’m Going To Need Your Name And Number For Insurance Purposes."
 ]
 
-obama=["""⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠛⠛⠛⠉⠉⠉⠋⠛⠛⠛⠻⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+obama = ["""⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠛⠛⠛⠉⠉⠉⠋⠛⠛⠛⠻⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠛⠉⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠉⠙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠋⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠈⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠏⠄⠄⠄⠄⠄⠄⠄⠂⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠈⠹⣿⣿⣿⣿⣿⣿⣿
@@ -65,16 +66,15 @@ obama=["""⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠛�
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⣱⡐⡕⡕⡽⣝⣟⣮⣾⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣵⣽⣸⣃⣧⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿"""]
 
-
 for file in os.listdir("obama"):
     filename = os.fsdecode(file)
     if filename.endswith(".jpg"):
-        obama.append("obama/"+file)
+        obama.append("obama/" + file)
         continue
     else:
         continue
 
-anime_waifus=[
+anime_waifus = [
     """⠄⠄⠄⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄
        ⠄⠄⠄⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄
        ⠄⠄⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄
@@ -91,8 +91,7 @@ anime_waifus=[
         ⠄⠄⠄⠄⠄⠄⠄⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁⠄⠄⠄⠄⠄⢀⣠⣴
         ⣿⣿⣿⣶⣶⣮⣥⣒⠲⢮⣝⡿⣿⣿⡆⣿⡿⠃⠄⠄⠄⠄⠄⠄⠄⣠⣴⣿⣿⣿ """,
 
-
-        """⡏⠉⠉⠉⠉⠉⠉⠋⠉⠉⠉⠉⠉⠉⠋⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠙⠉⠉⠉⠹
+    """⡏⠉⠉⠉⠉⠉⠉⠋⠉⠉⠉⠉⠉⠉⠋⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠙⠉⠉⠉⠹
             ⡇⢸⣿⡟⠛⢿⣷⠀⢸⣿⡟⠛⢿⣷⡄⢸⣿⡇⠀⢸⣿⡇⢸⣿⡇⠀⢸⣿⡇⠀
             ⡇⢸⣿⣧⣤⣾⠿⠀⢸⣿⣇⣀⣸⡿⠃⢸⣿⡇⠀⢸⣿⡇⢸⣿⣇⣀⣸⣿⡇⠀
             ⡇⢸⣿⡏⠉⢹⣿⡆⢸⣿⡟⠛⢻⣷⡄⢸⣿⡇⠀⢸⣿⡇⢸⣿⡏⠉⢹⣿⡇⠀
@@ -111,10 +110,9 @@ anime_waifus=[
             ⣷⢄⠻⣿⣟⠿⠦⠍⠉⣡⣾⣿⣿⣿⣿⣿⣿⢸⣿⣦⠙⣿⣿⣿⣿⣿⣿⣿⣿⠟
             ⡕⡑⣑⣈⣻⢗⢟⢞⢝⣻⣿⣿⣿⣿⣿⣿⣿⠸⣿⠿⠃⣿⣿⣿⣿⣿⣿⡿⠁⣠
             ⡝⡵⡈⢟⢕⢕⢕⢕⣵⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣿⣿⣿⣿⣿⠿⠋⣀⣈⠙
-            ⡝⡵⡕⡀⠑⠳⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⢉⡠⡲⡫⡪⡪⡣""" ,
+            ⡝⡵⡕⡀⠑⠳⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⢉⡠⡲⡫⡪⡪⡣""",
 
-
-        """                             ⣤⣶⣶⣶⣶⣶⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    """                             ⣤⣶⣶⣶⣶⣶⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⢿⣿⣿⡿⣿⣿⣿⣿⣿⣿⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⡇⣿⣷⣿⣿⣿⣿⣿⣿⣯⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -141,10 +139,9 @@ anime_waifus=[
                     ⠀⠀⠀⠈⠂⠀⠀⠀⠈⣿⠁⠀⠀⠀⡇⠁⠀⠘⢿⣿⣿⠿⠟⠋⠛⠛⠛⠀⢸⠀⠀⡀⠂⠀⠀⠐⠛⠉⠀⠀
                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠕⣠⡄⣰⡇⠀⠀⠀⢸⣧⠀⠀⠀⠀⠀⠀⠀⢀⣸⠠⡪⠊⠀⠀⠀⠀⠀⠀⠀⠀
                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢫⣽⡋⠭⠶⠮⢽⣿⣆⠀⠀⠀⠀⢠⣿⣓⣽⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⢹⣶⣦⣾⣿⣿⣿⡏⠀⠀⠀""" , 
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⢹⣶⣦⣾⣿⣿⣿⡏⠀⠀⠀""",
 
-
-                    """
+    """
                                 ⠄⠄⢿⣇⠄⠄⠘⣆⢀⣼⣿⣿⣿⣿⢿⡿⣿⢻⣿⣿⣿⣿⣿⣿⣿⣟⢧⡲⣿⢷⢦⡀
                                 ⠄⠄⠈⣿⠄⠄⠄⢙⢞⢿⣿⢹⢿⣦⢏⣱⢿⠘⣿⣝⠹⢿⣿⡽⣿⣿⣏⣆⢿⣿⡞⠁
                                 ⠄⠄⠄⢻⡀⠄⠄⠈⣾⡸⡏⢸⡾⣴⣿⣿⣶⣼⣎⢵⢀⡛⣿⣷⡙⡻⢻⡴⠨⠨⠖⠃
@@ -158,42 +155,38 @@ anime_waifus=[
                                 ⢠⣾⢟⡴⢫⡾⣱⢟⠄⠄⢸⠄⢈⡓⡮⡦⡬⠽⡠⠄⠔⠄⢸⠈⣿⣿⡄⣷⢹⣆⠄⠄
                                 ⡿⢁⠞⢀⣿⢣⠇⣿⠄⠄⠸⢀⢳⢣⣗⣿⡇⡔⠄⠔⠄⠄⢠⠄⠹⣿⣷⡝⣧⢻⣆ """
 
-  
-
-
-
-
-
-
 ]
-def get_quote():
-  response = requests.get("https://zenquotes.io/api/random")
-  json_data = json.loads(response.text)
-  quote = json_data[0]['q'] + " -" + json_data[0]['a']
-  return(quote)
 
-    
+
+def get_quote():
+    response = requests.get("https://zenquotes.io/api/random")
+    json_data = json.loads(response.text)
+    return json_data[0]['q'] + " -" + json_data[0]['a']
+
+
 @bot.event
 async def on_ready():
     print(' We have logged in as {0.user}'.format(bot))
 
-    
+
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
         return
 
     if message.content.startswith('weeb_scanner'):
-        await message.channel.send('weeeeeeb scanning 3 2 1 ..... Every other person here is Weeb oh wait I see one person is not OH it the admin hey why you feel alone here?')
+        await message.channel.send(
+            'weeeeeeb scanning 3 2 1 ..... Every other person here is Weeb oh wait I see one person is not OH it the admin hey why you feel alone here?')
     if message.content.startswith('!lurid'):
-        await message.channel.send('bruh that girl said you have smol lol IMAGINE A non real thing saying yours smol HAHA')
+        await message.channel.send(
+            'bruh that girl said you have smol lol IMAGINE A non real thing saying yours smol HAHA')
     if message.content.startswith('so bad'):
         await message.channel.send('(laughing inside)')
     if message.content.startswith('maffat'):
         await message.channel.send('whats maffat? 😳')
 
     if message.content.startswith('!shrek'):
-        await message.channel.send("GET OUT OF MY SWAMP!")    
+        await message.channel.send("GET OUT OF MY SWAMP!")
     if message.content.startswith('!inspire'):
         quote = get_quote()
         await message.channel.send(quote)
@@ -210,37 +203,37 @@ async def on_message(message):
 
     if message.content.startswith('waifus'):
         await message.channel.send(random.choice(anime_waifus))
-    
+
     if message.content.startswith('arcyrollno'):
         await message.channel.send('37 C')
 
     if message.content.startswith('shrenikrollno'):
         await message.channel.send('32 B')
-        
+
     if message.content.startswith('luridrollno'):
         await message.channel.send('33 B')
 
     if message.content.startswith('!cute'):
         await message.channel.send(random.choice(cute_pick_up_lines))
-    
+
     if message.content.startswith('pee'):
         await message.channel.send('here take this bottle (gives a bottle)')
 
     if message.content.startswith('plshowsmert admin'):
         await message.channel.send('wooo ayyy (will smith\'s voice) TOO SMERT FOR THIS WORLD')
     if message.content.startswith('wanna'):
-        await message.channel.send('HAHHAHAHAHAHHAHAHHAHAHAHHAHAHAHAHAHAHHAHAHHAHAHAHAHAHHAHAHHHHHHHHAAAAAAAAAAAHHHHHAAAAAAAAAAAAAAAAhaha')
-
+        await message.channel.send(
+            'HAHHAHAHAHAHHAHAHHAHAHAHHAHAHAHAHAHAHHAHAHHAHAHAHAHAHHAHAHHHHHHHHAAAAAAAAAAAHHHHHAAAAAAAAAAAAAAAAhaha')
 
     if message.content.startswith('hello'):
         await message.channel.send('Hello!')
 
     if message.content.startswith('!admin'):
         await message.channel.send('ok TRUST ME GUYS OUR ADMIN IS HOT(he has a gun on me pls help!)')
-    
+
     if message.content.startswith('!Arcy'):
         await message.channel.send('no wonder why he not simping for me ')
-    
+
     if message.content.startswith('!Luridnub'):
         await message.channel.send('He is a productive POGGER')
 
@@ -263,11 +256,11 @@ async def on_message(message):
         await message.channel.send('HAppy Republic Day , Am I late,? OOPSIE!')
 
     if message.content.startswith('neh'):
-        await message.channel.send('It\'s okay Admin , You must  have been busy' )
-    
+        await message.channel.send('It\'s okay Admin , You must  have been busy')
+
     if message.content.startswith('adminrollno'):
         await message.channel.send('17')
-    
+
     if message.content.startswith('eraserrollno'):
         await message.channel.send('7')
 
@@ -376,6 +369,31 @@ async def stop(ctx):
         await voice_client.stop()
     else:
         await ctx.send("The bot is not playing anything at the moment.")
+
+
+@bot.command(aliases=["8ball"])
+async def _8ball(ctx, *, question):
+    responses = ["It is certain.",
+                 "It is decidedly so.",
+                 "Without a doubt.",
+                 "Yes - definitely.",
+                 "You may rely on it.",
+                 "As I see it, yes.",
+                 "Most likely.",
+                 "Outlook good.",
+                 "Yes.",
+                 "Signs point to yes.",
+                 "Reply hazy, try again.",
+                 "Ask again later.",
+                 "Better not tell you now.",
+                 "Cannot predict now.",
+                 "Concentrate and ask again.",
+                 "Don't count on it.",
+                 "My reply is no.",
+                 "My sources say no.",
+                 "Outlook not so good.",
+                 "Very doubtful."]
+    await ctx.send(f"**Question:** {question}\n**Answer:** {random.choice(responses)}")
 
 if __name__ == "__main__":
     keep_alive()

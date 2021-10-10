@@ -9,8 +9,7 @@ class Events(commands.Cog):
     # Loads bot, and lets us know when its ready
     @commands.Cog.listener()
     async def on_ready(self):
-        print("Logged in as " + self.client.user.name)
-        print(self.client.user.id)
+        print("We have logged in as " + self.client.user.name)
         print("-----------------------")
 
     # When a known command fails, throws error

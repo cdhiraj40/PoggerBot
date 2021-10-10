@@ -2,3 +2,4 @@ discord~=1.7.3
 requests~=2.26.0
 dotenv~=0.0.5
 youtube_dl~=2021.6.6
+Flask~=2.0.2

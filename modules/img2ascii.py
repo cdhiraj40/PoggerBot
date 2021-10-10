@@ -1,5 +1,4 @@
 import PIL.Image
-import requests
 
 # ASCII characters
 ASCII = [ "@", "#", "$", "%", "?", "*", "+", ";", ":", ",", "." ]
@@ -9,6 +8,8 @@ new_width = 80
 def resize_img(image, new_width=80):
     width, height = image.size
     ratio = height/width
+    # Compensating space difference between 2 consecutive letters and 2 new lines
+    # Otherwise output looks streched
     new_height = int(new_width * ratio)//1.75
     resized_img = image.resize((new_width, int(new_height)))
     return resized_img

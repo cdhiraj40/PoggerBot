@@ -4,7 +4,7 @@ import requests
 import json
 import random
 from keep_alive import keep_alive
-from img2ascii import ascii_output
+from modules.img2ascii import ascii_output
 from discord.ext import commands
 from dotenv import load_dotenv
 # import youtube_dl
@@ -282,6 +282,8 @@ async def on_message(message):
         # Downloading image
         image_url = message.content.split()[1]
         img_data = requests.get(image_url).content
+
+        # Writing Image to local directory
         with open('image_name.jpg', 'wb') as handler:
             handler.write(img_data)
 
@@ -325,21 +327,21 @@ ffmpeg_options = {
 # ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 
 
-# class YTDLSource(discord.PCMVolumeTransformer):
-#     def __init__(self, source, *, data, volume=0.5):
-#         super().__init__(source, volume)
-#         self.data = data
-#         self.title = data.get('title')
-#         self.url = ""
+class YTDLSource(discord.PCMVolumeTransformer):
+    def __init__(self, source, *, data, volume=0.5):
+        super().__init__(source, volume)
+        self.data = data
+        self.title = data.get('title')
+        self.url = ""
 
-#     @classmethod
-#     async def from_url(cls, url, *, loop=None, stream=False):
-#         loop = loop or asyncio.get_event_loop()
-#         data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
-#         if 'entries' in data:
-#             data = data['entries'][0]
-#         filename = data['title'] if stream else ytdl.prepare_filename(data)
-#         return filename
+    @classmethod
+    async def from_url(cls, url, *, loop=None, stream=False):
+        loop = loop or asyncio.get_event_loop()
+        data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
+        if 'entries' in data:
+            data = data['entries'][0]
+        filename = data['title'] if stream else ytdl.prepare_filename(data)
+        return filename
 
 @bot.command(name='join', help='Tells the bot to join the voice channel')
 async def join(ctx):
@@ -360,18 +362,18 @@ async def leave(ctx):
         await ctx.send("The bot is not connected to a voice channel.")
 
 
-# @bot.command(name='play', help='To play song')
-# async def play(ctx, url):
-#     try:
-#         server = ctx.message.guild
-#         voice_channel = server.voice_client
+@bot.command(name='play', help='To play song')
+async def play(ctx, url):
+    try:
+        server = ctx.message.guild
+        voice_channel = server.voice_client
 
-#         async with ctx.typing():
-#             filename = await YTDLSource.from_url(url, loop=bot.loop)
-#             voice_channel.play(discord.FFmpegPCMAudio(executable="ffmpeg.exe", source=filename))
-#         await ctx.send('**Now playing:** {}'.format(filename))
-#     except:
-#         await ctx.send("The bot is not connected to a voice channel.")
+        async with ctx.typing():
+            filename = await YTDLSource.from_url(url, loop=bot.loop)
+            voice_channel.play(discord.FFmpegPCMAudio(executable="ffmpeg.exe", source=filename))
+        await ctx.send('**Now playing:** {}'.format(filename))
+    except:
+        await ctx.send("The bot is not connected to a voice channel.")
 
 
 @bot.command(name='pause', help='This command pauses the song')
@@ -401,5 +403,5 @@ async def stop(ctx):
         await ctx.send("The bot is not playing anything at the moment.")
 
 if __name__ == "__main__":
-    #keep_alive()
+    keep_alive()
     bot.run(os.getenv('TOKEN'))

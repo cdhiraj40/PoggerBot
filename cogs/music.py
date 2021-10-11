@@ -108,7 +108,6 @@ class Music(commands.Cog):
     async def play(self, ctx, *url: str):
         try:
             voice_channel = get(self.client.voice_clients, guild=ctx.guild)
-
             async with ctx.typing():
                 song, video_title = await YTDLSource.from_url(url, loop=self.client.loop)
                 voice_channel.play(song, after=lambda e: self.check_queue(ctx))
@@ -120,7 +119,8 @@ class Music(commands.Cog):
     async def pause(self, ctx):
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_playing():
-            await voice_client.pause()
+            voice_client.pause()
+            await ctx.send("Music has been paused!")
         else:
             await ctx.send("The bot is not playing anything at the moment.")
 
@@ -128,7 +128,8 @@ class Music(commands.Cog):
     async def resume(self, ctx):
         voice_client = ctx.message.guild.voice_client
         if voice_client.is_paused():
-            await voice_client.resume()
+            voice_client.resume()
+            await ctx.send("Music has resumed!")
         else:
             await ctx.send("The bot was not playing anything before this. Use play command")
 
@@ -139,6 +140,7 @@ class Music(commands.Cog):
             cur_queue.clear()
         elif voice_client.is_playing():
             voice_client.stop()
+            await ctx.send("Stopping the music! The queue is now clear!")
         else:
             await ctx.send("The bot is not playing anything at the moment.")
 
@@ -181,7 +183,7 @@ class Music(commands.Cog):
     @commands.command(aliases=["show_queue"])
     async def queue(self, ctx):
         msg_queue = [item[0] for item in cur_queue]
-        await ctx.send("Current Queue: \n" + "\n".join(msg_queue))
+        await ctx.send("**Current Queue:** \n" + "\n".join(msg_queue))
 
     @commands.command(aliases=["n", "skip", "s", "sk"])
     async def next(self, ctx):

@@ -347,21 +347,24 @@ class Commands(commands.Cog):
             if os.path.isfile(file):
                 os.remove(file)
         # Downloading image
-        img_data = requests.get(image_url).content
+        async with aiohttp.ClientSession() as session:
+            async with session.get(image_url) as img:
 
-        # Writing Image to local directory
-        with open('image_name.jpg', 'wb') as handler:
-            handler.write(img_data)
+                img_data = await img.content.read()
 
-        # Converting Image to ASCII format
-        res = ascii_output('image_name.jpg')
+                # Writing Image to local directory
+                with open('image_name.jpg', 'wb') as handler:
+                    handler.write(img_data)
 
-        # Writing to txt file (Since the ASCII output is larger than 2000 characters)
-        # Due to discord's 200 character limit Sending large message string throws error in discord
-        # Sending a .txt file allows us to send longer text which can be copy-pasted from chat just like a message
-        with open(r"ascii_image.txt", "w") as f:
-            f.write(res)
-        await ctx.send(file=discord.File("ascii_image.txt"))
+                # Converting Image to ASCII format
+                res = ascii_output('image_name.jpg')
+
+                # Writing to txt file (Since the ASCII output is larger than 2000 characters)
+                # Due to discord's 200 character limit Sending large message string throws error in discord
+                # Sending a .txt file allows us to send longer text which can be copy-pasted from chat just like a message
+                with open(r"ascii_image.txt", "w") as f:
+                    f.write(res)
+                await ctx.send(file=discord.File("ascii_image.txt"))
 
 
 # This function allows us to connect this cog to our bot

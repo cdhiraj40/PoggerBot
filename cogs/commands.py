@@ -227,37 +227,37 @@ class Commands(commands.Cog):
     async def inspire(self, ctx, message = " "):
         user = message.lower()
         if user == "daily":
-            async with aiohttp.ClientSession() as session:
+            async with aiohttp.ClientSession() as session: # Initailizing the aiohhttp module to get the quote
                 async with session.get("https://zenquotes.io/api/today") as response:
                     json_data = json.loads(await response.text())
-                    quote = json_data[0]["q"] + " - " + json_data[0]['a']
+                    quote = json_data[0]["q"] + " - " + json_data[0]['a'] #Extracting data from the json
                     em = discord.Embed(title="Quote of the day -", description=quote, colour=discord.Color.random())
                     await ctx.send(embed=em)
         elif user == " ":   
             async with aiohttp.ClientSession() as session:
                 async with session.get("https://zenquotes.io/api/random") as response:
                     json_data = json.loads(await response.text())
-                    quote = json_data[0]["q"] + " - " + json_data[0]['a']
+                    quote = json_data[0]["q"] + " - " + json_data[0]['a'] #Extracting data from the json
                     em = discord.Embed(title="Quote -", description=quote, colour=discord.Color.random())
                     await ctx.send(embed=em)
-        else:
+        else: # Throws an error if you don't send the message correctly
             em = discord.Embed(title="Error -", description=f"{ctx.author.mention} Please make sure if you have no spelling error in the command.")
             await ctx.send(embed=em)
             
     @commands.command()
     async def rps(self, ctx, message):
-        user = message.lower()
+        user = message.lower() #Takes the user choice in (r, p, s)
         choices = ['r', 'p', 's']
         computer = random.choice(['r', 'p', 's'])
         if user not in choices:
             await ctx.send("Wrong input. 'r' for rock, 'p' for paper, 's' for scissors, nothing else is allowed.")
             return
         else:
-            if user == computer:
+            if user == computer: # Draw condition
                 await ctx.send(f"Draw, you both chose '{user}'")
-            if user == 'r' and computer == 's' or user == 'p' and computer == 'r' or user == 's' and computer == 'p':
+            if user == 'r' and computer == 's' or user == 'p' and computer == 'r' or user == 's' and computer == 'p': # Winning condition
                 await ctx.send(f"You won!! computer chose {computer} losing to you")
-            if user == 's' and computer == 'r' or user == 'r' and computer == 'p' or user == 'p' and computer == 's':
+            if user == 's' and computer == 'r' or user == 'r' and computer == 'p' or user == 'p' and computer == 's': # Losing condition
                 await ctx.send(f"Computer won unfortunately :( , computer chose '{computer}' defeating you")
 
     @commands.command()

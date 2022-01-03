@@ -87,65 +87,74 @@ class Music(commands.Cog):
             voice_channel.play(song_url, after=lambda e: self.check_queue(ctx))
             return
 
-    @commands.command(name='join', help='Tells the bot to join the voice channel')
+    @commands.command(aliases=["j"], help='Tells the bot to join the voice channel')
     async def join(self, ctx):
-        if not ctx.message.author.voice:
-            await ctx.send("{} is not connected to a voice channel".format(ctx.message.author.name))
-            return
-        else:
-            channel = ctx.message.author.voice.channel
-        await channel.connect()
-
-    @commands.command(name='leave', help='To make the bot leave the voice channel')
-    async def leave(self, ctx):
-        voice_client = ctx.message.guild.voice_client
-        if voice_client.is_connected():
-            await voice_client.disconnect()
-        else:
-            await ctx.send("The bot is not connected to a voice channel.")
-
-    @commands.command(name='play', help='To play song')
-    async def play(self, ctx, *url: str):
         try:
-            voice_channel = get(self.client.voice_clients, guild=ctx.guild)
-            async with ctx.typing():
-                song, video_title = await YTDLSource.from_url(url, loop=self.client.loop)
-                voice_channel.play(song, after=lambda e: self.check_queue(ctx))
-            await ctx.send('**Now playing:** {}'.format(video_title))
+            if not ctx.message.author.voice:
+                await ctx.send("{} is not connected to a voice channel".format(ctx.message.author.name))
+                return
+            else:
+                channel = ctx.message.author.voice.channel
+            await channel.connect()
         except Exception as e:
+            print(e)
+            await ctx.send("{} is not connected to a voice channel".format(ctx.message.author.name))
+
+    @commands.command(aliases=["l"], help='To make the bot leave the voice channel')
+    async def leave(self, ctx):
+        try:
+            voice_client = ctx.message.guild.voice_client
+            if voice_client.is_connected():
+                await voice_client.disconnect()
+            else:
+                await ctx.send("The bot is not connected to a voice channel.")
+        except Exception as e:
+            print(e)
             await ctx.send("The bot is not connected to a voice channel.")
 
-    @commands.command(name='pause', help='This command pauses the song')
+    @commands.command(aliases=["pa"], help='This command pauses the song')
     async def pause(self, ctx):
-        voice_client = ctx.message.guild.voice_client
-        if voice_client.is_playing():
-            voice_client.pause()
-            await ctx.send("Music has been paused!")
-        else:
-            await ctx.send("The bot is not playing anything at the moment.")
+        try:
+            voice_client = ctx.message.guild.voice_client
+            if voice_client.is_playing():
+                voice_client.pause()
+                await ctx.send("Music has been paused!")
+            else:
+                await ctx.send("Nothing is currently playing! Use the play command!")
+        except Exception as e:
+            print(e)
+            await ctx.send("Nothing is currently playing! Use the play command!")
 
-    @commands.command(name='resume', help='Resumes the song')
+    @commands.command(aliases=["re"], help='Resumes the song')
     async def resume(self, ctx):
-        voice_client = ctx.message.guild.voice_client
-        if voice_client.is_paused():
-            voice_client.resume()
-            await ctx.send("Music has resumed!")
-        else:
-            await ctx.send("The bot was not playing anything before this. Use play command")
+        try:
+            voice_client = ctx.message.guild.voice_client
+            if voice_client.is_paused():
+                voice_client.resume()
+                await ctx.send("Music has resumed!")
+            else:
+                await ctx.send("Nothing is currently playing! Use the play command!")
+        except Exception as e:
+            print(e)
+            await ctx.send("Nothing is currently playing! Use the play command!")
 
-    @commands.command(name='stop', help='Stops the song')
+    @commands.command(aliases=["st"], help='Stops the song')
     async def stop(self, ctx):
-        voice_client = ctx.message.guild.voice_client
-        if len(cur_queue) != 0:
-            cur_queue.clear()
-        elif voice_client.is_playing():
-            voice_client.stop()
-            await ctx.send("Stopping the music! The queue is now clear!")
-        else:
-            await ctx.send("The bot is not playing anything at the moment.")
+        try:
+            voice_client = ctx.message.guild.voice_client
+            if len(cur_queue) != 0:
+                cur_queue.clear()
+            elif voice_client.is_playing():
+                voice_client.stop()
+                await ctx.send("Stopping the music! The queue is now clear!")
+            else:
+                await ctx.send("Nothing is currently playing! Use the play command!")
+        except Exception as e:
+            print(e)
+            await ctx.send("Nothing is currently playing! Use the play command!")
 
-    @commands.command(aliases=["add"])
-    async def add_queue(self, ctx, *, urls):
+    @commands.command(aliases=["add_queue", "a", "p", "pl", "play"])
+    async def add(self, ctx, *, urls):
         song_list = []
         if '&' in str(urls):
             song_list = urls.split(' & ')
@@ -178,11 +187,18 @@ class Music(commands.Cog):
                 await ctx.send('**Song added to queue:** {}'.format(video_title))
             except Exception as e:
                 print(e)
-                await ctx.send("The bot is not connected to a voice channel.")
+                return await ctx.send("Unable to add songs to queue, please try again... "
+                                      "\n\nWas I already adding songs?")
 
-    @commands.command(aliases=["show_queue"])
+    @commands.command(aliases=["r, removequeue"])
+    async def remove(self, ctx, *, song_position):
+        msg = f"**Removed:** {cur_queue[int(song_position) - 1][0]}"
+        del cur_queue[int(song_position) - 1]
+        await ctx.send(msg)
+
+    @commands.command(aliases=["show_queue", "q"])
     async def queue(self, ctx):
-        msg_queue = [item[0] for item in cur_queue]
+        msg_queue = [f"**{i}** - {song[0]}" for i, song in enumerate(cur_queue, start=1)]
         await ctx.send("**Current Queue:** \n" + "\n".join(msg_queue))
 
     @commands.command(aliases=["n", "skip", "s", "sk"])
@@ -198,7 +214,7 @@ class Music(commands.Cog):
                             f'**Skipping... Now playing:** {song_name}' + f'\n**Up Next!:** {cur_queue[1][0]}')
                     else:
                         return await ctx.channel.send(
-                            f'**Skipping... Now playing:** {song_name}' + f'\n**The queue is now empty!**')
+                            f'**Skipping... Now playing:** {song_name}' + '\n**The queue is now empty!**')
             except Exception as e:
                 print(e)
                 print("No Music playing - failed to play next song")
